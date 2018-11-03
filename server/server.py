@@ -7,26 +7,20 @@ import random
 import json
 from sample import getCaption
 from build_vocab import Vocabulary
+import os
+
 
 app = Flask(__name__)
-client = algoliasearch.Client("-", '-')
-index = client.init_index('random')
+client = algoliasearch.Client(os.environ['ALGOLIA_APPLICATION'], os.environ['ALGOLIA_ADMIN'])
+index = client.init_index('whodat')
 index.set_settings({
   'searchableAttributes': [
     'caption'
   ]
 })
 
-
-
 @app.route('/classify', methods=['GET', 'POST'])
 def putResultsInAlgolia():
-    # print("Request received!")
-    # url = "facebook.com"
-    # caption = "delete that shit"
-    # x = {"url": url, "caption": caption}
-    # index.addObject(x)
-    # return caption
     content = request.get_json(silent=True)
 
     # Got image encoded in base 64, need to convert it to png
@@ -48,7 +42,7 @@ def putResultsInAlgolia():
         if result != None:
             index.addObject(result)
             print("PREDICTION:", result)
-            return json.dumps({'status': 'OK', 'caption': result.caption})
+            return json.dumps({'status': 'OK', 'caption': result['caption']})
         return json.dumps({"status": "ERROR"})
     else:
         return json.dumps({"status": "ERROR"})

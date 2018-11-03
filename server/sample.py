@@ -10,6 +10,8 @@ from torchvision import transforms
 from build_vocab import Vocabulary
 from model import EncoderCNN, DecoderRNN
 from PIL import Image
+from google.cloud import storage
+import os
 
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -73,7 +75,19 @@ def main(args):
     # image = Image.open(args.image)
     # plt.imshow(np.asarray(image))
     # plt.show()
-    return sentence_trimmed
+    url_cloud = upload_to_google_cloud(args.image)
+    os.remove(args.image)
+    return {'url': url_cloud, 'caption': sentence_trimmed}
+
+
+def upload_to_google_cloud(source_file_name, bucket_name="jacobshack"):
+   """Uploads a file to the bucket."""
+   storage_client = storage.Client()
+   bucket = storage_client.get_bucket(bucket_name)
+   blob = bucket.blob(source_file_name)
+   blob.upload_from_filename(source_file_name)
+   return "https://storage.googleapis.com/" + bucket_name + "/" + source_file_name
+
 
 def getCaption(image):
     class Object(object):
