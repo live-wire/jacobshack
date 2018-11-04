@@ -1,14 +1,16 @@
 /* GENERAL */
 * {
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  margin: 0 auto;
 }
 html {
   overflow-y: scroll;
-  background: #FFF;
+  background: #000;
 }
 header, main, #no-results, footer {
   width: 1000px;
   margin: 0 auto;
+  position: relative;
 }
 main {
   min-height: 360px;
@@ -28,25 +30,35 @@ main {
   clear: both;
 }
 
+#jhacklogo {
+  position: relative;
+  width: 100%;
+}
+
+.ais-search-box {
+  overflow: hidden;
+}
+
 /* INPUT */
 header {
   position: relative;
   height: 80px;
   margin-top: 40px;
+  margin-bottom: 200px;
+  text-align: center;
 }
 header img {
-  position: absolute;
-  top: 9px;
-  left: 0;
-  float: left;
+  top: 0px;
+  left: 0px;
   max-width: 23%;
 }
+
 #search-input input {
   font-size: 28px;
   font-weight: 100;
   width: 74%;
   margin-left: 26%;
-  
+
   border: none;
   border-bottom: 5px solid #eee;
   border-radius: 5px;
@@ -86,6 +98,7 @@ header img {
   margin: 4px 0;
   padding: 10px 0;
   border-top: 2px solid #eee;
+  color: white;
 }
 .hit {
   font-size: 0;
@@ -175,11 +188,11 @@ header img {
 #pagination a {
   padding: 8px 12px;
   text-decoration: none;
-  color: #000;
+  color: #fff;
   border: 1px solid #eee;
 }
 #pagination a:hover {
-  background: #f5f5f5;
+  background: #808080;
 }
 #pagination li:first-child a {
   border-top-left-radius: 4px;
