@@ -59,6 +59,6 @@ def getResultsFromAlgolia():
 
 
 if __name__ == '__main__':
-    serve(app,host='0.0.0.0', port=5002)
+    serve(app,host='0.0.0.0', port=5001)
     app.run()
 
