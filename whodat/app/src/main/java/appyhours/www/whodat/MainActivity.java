@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     public Context mContext = null;
     public TextToSpeech tts = null;
     public ToggleButton mSwitch = null;
+    private Button searchButton = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         mButton = findViewById(R.id.button);
         mTextView = findViewById(R.id.details);
         mTextView2 = findViewById(R.id.details2);
+        searchButton = findViewById(R.id.search_screen);
+
         mContext = this;
         Log.i("Carboon", "onCreate: MAIN ACTIVITY");
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +61,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mSwitch = (ToggleButton) findViewById(R.id.switch1);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SearchActivity.class));
+            }
+        });
 
     }
 
@@ -100,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://1e6b23ef.ngrok.io/classify");
+                    URL url = new URL("http://35.204.238.107:5001/classify");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
