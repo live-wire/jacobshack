@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/activity_main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" xmlns:algolia="http://schemas.android.com/apk/res-auto">
+        <com.algolia.instantsearch.ui.views.SearchBox
+            android:id="@+id/search_caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.algolia.instantsearch.ui.views.Hits
+            android:id="@+id/hit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            algolia:itemLayout="@layout/hits_item"/>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
